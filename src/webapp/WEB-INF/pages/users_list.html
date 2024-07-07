@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Users list</title>
+</head>
+
+<body>
+<div>
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 2px solid black;
+            letter-spacing: normal;
+            font-size: 1.2rem;
+        }
+
+        td, th {
+            border: 1px solid black;
+            padding: 10px 20px;
+        }
+
+        td {
+            text-align: center;
+        }
+
+        caption {
+            caption-side: top;
+            padding: 10px;
+            font-size: 1.5rem;
+        }
+
+        button[type=updatebutton] {
+            width: 100%;
+            border-color: #45a049;
+            border-width: 2px;
+            padding: 10px 10px;
+            margin: 8px 0;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button[type=deletebutton] {
+            width: 100%;
+            border-color: brown;
+            border-width: 2px;
+            padding: 10px 10px;
+            margin: 8px 0;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+
+    <table>
+        <caption>
+            List of Users
+        </caption>
+
+        <tr>
+            <th>ID</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Birthday</th>
+            <th>Email</th>
+            <th>Phone number</th>
+        </tr>
+
+        <tr th:each="user : ${userList}">
+            <td th:text="${user.getId()}"></td>
+            <td th:text="${user.getFirstName()}"></td>
+            <td th:text="${user.getLastName()}"></td>
+            <td th:text="${user.getBirthday()}"></td>
+            <td th:text="${user.getEmail()}"></td>
+            <td th:text="${user.getPhoneNumber()}"></td>
+            <td>
+                <form th:action="@{/users/update}" th:method="get">
+                    <div>
+                        <button type="updatebutton" th:name="id" th:value="${user.id}">Update user</button>
+                    </div>
+                </form>
+                <form th:action="@{/users/delete}" th:method="post">
+                    <div>
+                        <button type="deletebutton" th:name="id" th:value="${user.id}">Delete user</button>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<style>
+    button[type=adduser] {
+        width: 49%;
+        border-color: #45a049;
+        border-width: 2px;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+</style>
+
+<div1>
+<form th:action="@{/users/create}">
+    <br><button type="adduser">Add user</button>
+</form>
+</div1>
+</body>
+</html>
