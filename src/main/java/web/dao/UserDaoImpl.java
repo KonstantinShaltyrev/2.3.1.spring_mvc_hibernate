@@ -6,30 +6,19 @@ import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-@Transactional
-public class UserDaoImp implements UserDao{
+public class UserDaoImpl implements UserDao{
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Autowired
-    public UserDaoImp(LocalContainerEntityManagerFactoryBean entityManagerFactory) {
+    public UserDaoImpl(LocalContainerEntityManagerFactoryBean entityManagerFactory) {
         this.entityManager = entityManagerFactory.getObject().createEntityManager();
-
-        this.entityManager.getTransaction().begin();
-        addUser(new User("Name1", "Lastname1", LocalDate.of(1991, 1, 21), "user1@mail.ru", "123-456-7890"));
-        addUser(new User("Name2", "Lastname2", LocalDate.of(1992, 2, 22), "user2@mail.ru", "(123) 456-7890"));
-        addUser(new User("Name3", "Lastname3", LocalDate.of(1993, 3, 23), "user3@mail.ru", "+1(345)234-45-67"));
-        addUser(new User("Name4", "Lastname4", LocalDate.of(1994, 4, 24), "user4@mail.ru", "123.456.7890"));
-        addUser(new User("Name5", "Lastname5", LocalDate.of(1995, 5, 25), "user5@mail.ru", "+91 (123) 456-7890"));
-        this.entityManager.getTransaction().commit();
     }
 
     @Override

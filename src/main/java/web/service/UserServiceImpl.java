@@ -9,12 +9,12 @@ import web.model.User;
 import java.util.List;
 
 @Service
-public class UserServiceImp implements UserService {
+public class UserServiceImpl implements UserService {
 
     private UserDao userDao;
 
     @Autowired
-    public UserServiceImp(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }
 
